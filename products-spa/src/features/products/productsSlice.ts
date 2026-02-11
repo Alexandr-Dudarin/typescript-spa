@@ -2,14 +2,18 @@ import { createSlice } from '@reduxjs/toolkit';
 import type { PayloadAction } from '@reduxjs/toolkit';
 import type { Product } from './types';
 
+export type Filter = 'all' | 'favorites';
+
 interface ProductsState {
   items: Product[];
-  filter: 'all' | 'favorites';
+  filter: Filter;
+  search: string;
 }
 
 const initialState: ProductsState = {
   items: [],
   filter: 'all',
+  search: '',
 };
 
 const productsSlice = createSlice({
@@ -29,8 +33,11 @@ const productsSlice = createSlice({
     deleteProduct(state, action: PayloadAction<string>) {
       state.items = state.items.filter(p => p.id !== action.payload);
     },
-    setFilter(state, action: PayloadAction<'all' | 'favorites'>) {
+    setFilter(state, action: PayloadAction<Filter>) {
       state.filter = action.payload;
+    },
+    setSearch(state, action: PayloadAction<string>) {
+      state.search = action.payload;
     },
   },
 });
@@ -41,6 +48,7 @@ export const {
   toggleLike,
   deleteProduct,
   setFilter,
+  setSearch,
 } = productsSlice.actions;
 
 export default productsSlice.reducer;
