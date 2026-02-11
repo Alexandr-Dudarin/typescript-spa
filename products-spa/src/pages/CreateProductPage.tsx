@@ -2,6 +2,7 @@ import { useForm } from 'react-hook-form';
 import { useDispatch } from 'react-redux';
 import { addProduct } from '../features/products/productsSlice';
 import { useNavigate } from 'react-router-dom';
+import type { AppDispatch } from '../app/store';
 
 interface FormData {
   title: string;
@@ -11,7 +12,7 @@ interface FormData {
 
 const CreateProductPage = () => {
   const { register, handleSubmit } = useForm<FormData>();
-  const dispatch = useDispatch();
+  const dispatch = useDispatch<AppDispatch>();
   const navigate = useNavigate();
 
   const onSubmit = (data: FormData) => {

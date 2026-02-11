@@ -8,13 +8,20 @@ interface ProductsState {
   items: Product[];
   filter: Filter;
   search: string;
+  page: number;
+  pageSize: number;
 }
+
 
 const initialState: ProductsState = {
   items: [],
   filter: 'all',
   search: '',
+  page: 1,
+  pageSize: 8,
 };
+
+
 
 const productsSlice = createSlice({
   name: 'products',
@@ -39,6 +46,10 @@ const productsSlice = createSlice({
     setSearch(state, action: PayloadAction<string>) {
       state.search = action.payload;
     },
+    setPage(state, action: PayloadAction<number>) {
+      state.page = action.payload;
+},
+
   },
 });
 
@@ -49,6 +60,7 @@ export const {
   deleteProduct,
   setFilter,
   setSearch,
+  setPage
 } = productsSlice.actions;
 
 export default productsSlice.reducer;
