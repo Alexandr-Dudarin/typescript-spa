@@ -1,4 +1,4 @@
-import { Product } from '../features/products/types';
+import type { Product } from '../features/products/types';
 import { useDispatch } from 'react-redux';
 import { toggleLike, deleteProduct } from '../features/products/productsSlice';
 import { useNavigate } from 'react-router-dom';

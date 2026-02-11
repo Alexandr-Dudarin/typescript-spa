@@ -1,14 +1,14 @@
-import { Product } from '../features/products/types';
+import type { Product } from '../features/products/types';
 
 export async function fetchProducts(): Promise<Product[]> {
-  const res = await fetch('https://fakestoreapi.com/products');
+  const res = await fetch('https://dog.ceo/api/breeds/image/random/12');
   const data = await res.json();
 
-  return data.map((item: any) => ({
-    id: String(item.id),
-    title: item.title,
-    description: item.description,
-    image: item.image,
+  return data.message.map((url: string, index: number) => ({
+    id: String(index),
+    title: `Dog #${index + 1}`,
+    description: 'Cute dog image!',
+    image: url,
     liked: false,
   }));
 }

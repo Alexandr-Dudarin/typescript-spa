@@ -1,40 +1,26 @@
-import { useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { fetchProducts } from '../api/productsApi';
-import { setProducts, setFilter } from '../features/products/productsSlice';
-import { RootState } from '../app/store';
-import ProductCard from '../components/ProductCard';
-import { useNavigate } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
+import { useSelector } from 'react-redux';
+import type { RootState } from '../app/store';
 
-const ProductsPage = () => {
-  const dispatch = useDispatch();
+const ProductPage = () => {
+  const { id } = useParams();
   const navigate = useNavigate();
-  const { items, filter } = useSelector((s: RootState) => s.products);
 
-  useEffect(() => {
-    fetchProducts().then(data => dispatch(setProducts(data)));
-  }, [dispatch]);
+  const product = useSelector((s: RootState) =>
+    s.products.items.find(p => p.id === id)
+  );
 
-  const visibleProducts =
-    filter === 'favorites'
-      ? items.filter(p => p.liked)
-      : items;
+  if (!product) return <div>Product not found</div>;
 
   return (
     <div>
-      <h1>Products</h1>
+      <button onClick={() => navigate('/products')}>Back</button>
 
-      <button onClick={() => dispatch(setFilter('all'))}>All</button>
-      <button onClick={() => dispatch(setFilter('favorites'))}>Favorites</button>
-      <button onClick={() => navigate('/create-product')}>Create</button>
-
-      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: 16 }}>
-        {visibleProducts.map(p => (
-          <ProductCard key={p.id} product={p} />
-        ))}
-      </div>
+      <h2>{product.title}</h2>
+      <img src={product.image} width={200} />
+      <p>{product.description}</p>
     </div>
   );
 };
 
-export default ProductsPage;
+export default ProductPage;
