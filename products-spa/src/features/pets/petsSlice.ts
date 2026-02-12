@@ -34,8 +34,8 @@ const petsSlice = createSlice({
       state.items.unshift(action.payload);
     },
     toggleLike(state, action: PayloadAction<string>) {
-      const product = state.items.find(p => p.id === action.payload);
-      if (product) product.liked = !product.liked;
+      const pet = state.items.find(p => p.id === action.payload);
+      if (pet) pet.liked = !pet.liked;
     },
     deletePet(state, action: PayloadAction<string>) {
       state.items = state.items.filter(p => p.id !== action.payload);

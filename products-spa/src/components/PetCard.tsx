@@ -15,7 +15,7 @@ const PetCard = ({ pet }: Props) => {
 
   return (
     <div
-      onClick={() => navigate(`/products/${pet.id}`)}
+      onClick={() => navigate(`/pets/${pet.id}`)}
     >
       <img src={pet.image} 
       alt={pet.title}

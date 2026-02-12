@@ -35,10 +35,6 @@ const PetsPage = () => {
         page * pageSize
     );
 
-    console.log("page:", page); 
-    console.log("totalPages:", totalPages);
-
-
     return (
         <div className="pets-page">
             <h1>Pets</h1>
