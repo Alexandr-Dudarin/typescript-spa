@@ -12,16 +12,26 @@ interface PetsState {
   pageSize: number;
 }
 
+const loadState = (): PetsState => {
+  try {
+    const savedState = localStorage.getItem('petsState');
+    if (savedState) {
+      return JSON.parse(savedState);
+    }
+  } catch (error) {
+    console.error('Failed to parse localStorage');
+  }
 
-const initialState: PetsState = {
-  items: [],
-  filter: 'all',
-  search: '',
-  page: 1,
-  pageSize: 8,
+  return {
+    items: [],
+    filter: 'all',
+    search: '',
+    page: 1,
+    pageSize: 8,
+  };
 };
 
-
+const initialState: PetsState = loadState();
 
 const petsSlice = createSlice({
   name: 'pets',
