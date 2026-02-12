@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchPets } from '../api/petsApi';
 import { setPets, setFilter, setSearch, setPage } from '../features/pets/petsSlice';
@@ -14,6 +14,7 @@ const PetsPage = () => {
     const navigate = useNavigate();
     const { items, filter, search, page, pageSize } = useSelector((s: RootState) => s.pets);
 
+    const [localSearch, setLocalSearch] = useState(search);
 
     useEffect(() => {
         if (items.length === 0) {
@@ -21,6 +22,17 @@ const PetsPage = () => {
         }
     }, [dispatch, items.length]);
 
+    useEffect(() => {
+        const timeout = setTimeout(() => {
+            dispatch(setSearch(localSearch));
+        }, 500);
+
+        return () => clearTimeout(timeout);
+    }, [localSearch, dispatch]);
+
+    useEffect(() => {
+        setLocalSearch(search);
+    }, [search]);
 
     const filteredPets = items
         .filter(p => (filter === 'favorites' ? p.liked : true))
@@ -43,8 +55,8 @@ const PetsPage = () => {
                 <input
                     type="text"
                     placeholder="Search by title..."
-                    value={search}
-                    onChange={e => dispatch(setSearch(e.target.value))}
+                    value={localSearch}
+                    onChange={e => setLocalSearch(e.target.value)}
                     className="pets-page__search" />
 
                 <button className={`button ${filter === 'all' ? 'button--active' : ''}`}
