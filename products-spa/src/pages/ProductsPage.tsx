@@ -28,18 +28,20 @@ const ProductsPage = () => {
             p.title.toLowerCase().includes(search.toLowerCase())
         );
 
-    const totalPages = Math.ceil(filteredProducts.length / pageSize);
+    const totalPages = Math.ceil(filteredProducts.length / pageSize) || 0;
 
     const paginatedProducts = filteredProducts.slice(
         (page - 1) * pageSize,
         page * pageSize
     );
 
+    console.log("page:", page); 
+    console.log("totalPages:", totalPages);
 
 
     return (
         <div className="products-page">
-            <h1>Products</h1>
+            <h1>Pets</h1>
 
             <div className="products-page__controls">
                 <input
@@ -72,7 +74,7 @@ const ProductsPage = () => {
                 </button>
 
                 <span>
-                    Page {totalPages === 0 ? 0 : page} of {totalPages}
+                    Page {page} of {totalPages}
                 </span>
 
                 <button
