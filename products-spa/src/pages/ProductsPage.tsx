@@ -49,8 +49,10 @@ const ProductsPage = () => {
                     onChange={e => dispatch(setSearch(e.target.value))}
                     className="products-page__search" />
 
-                <button className={filter === 'all' ? 'active' : ''} onClick={() => dispatch(setFilter('all'))}>All</button>
-                <button className={filter === 'favorites' ? 'active' : ''} onClick={() => dispatch(setFilter('favorites'))}>Favorites</button>
+                <button className={`button ${filter === 'all' ? 'button--active' : ''}`}
+                    onClick={() => dispatch(setFilter('all'))}>All</button>
+                <button className={`button ${filter === 'favorites' ? 'button--active' : ''}`}
+                    onClick={() => dispatch(setFilter('favorites'))}>Favorites</button>
                 <button className="button button--primary" onClick={() => navigate('/create-product')}>Create</button>
             </div>
 
@@ -62,6 +64,7 @@ const ProductsPage = () => {
 
             <div className="products-page__pagination">
                 <button
+                    className="button"
                     disabled={page === 1}
                     onClick={() => dispatch(setPage(page - 1))}
                 >
@@ -73,6 +76,7 @@ const ProductsPage = () => {
                 </span>
 
                 <button
+                    className="button"
                     disabled={page === totalPages || totalPages === 0}
                     onClick={() => dispatch(setPage(page + 1))}
                 >

@@ -28,39 +28,6 @@
   gap: 12px;
 }
 
-.products-page__controls button {
-  padding: 8px 14px;
-  border: 1px solid #ccc;
-  background: white;
-  cursor: pointer;
-  border-radius: 6px;
-  transition: all 0.2s ease;
-}
-
-.products-page__controls button:hover {
-  background: #f3f3f3;
-  border-color: #999;
-}
-
-.products-page__controls button.active {
-  background: #222;
-  color: white;
-  border-color: #222;
-}
-
-.button {
-  padding: 6px 12px;
-  border: 1px solid #ccc;
-  background: white;
-  cursor: pointer;
-}
-
-.button--primary {
-  background: #4caf50;
-  color: white;
-  border-color: #4caf50;
-}
-
 @media (max-width: 1024px) {
   .products-page__grid {
     grid-template-columns: repeat(2, 1fr);
