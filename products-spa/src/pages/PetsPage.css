@@ -1,27 +1,27 @@
-.products-page {
+.pets-page {
   padding: 24px;
 }
 
-.products-page__controls {
+.pets-page__controls {
   margin-bottom: 16px;
   display: flex;
   gap: 12px;
   flex-wrap: wrap;
 }
 
-.products-page__search {
+.pets-page__search {
   padding: 8px;
   min-width: 250px;
 }
 
-.products-page__grid {
+.pets-page__grid {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   gap: 16px;
   margin-top: 16px;
 }
 
-.products-page__pagination {
+.pets-page__pagination {
   margin-top: 24px;
   display: flex;
   align-items: center;
@@ -29,13 +29,13 @@
 }
 
 @media (max-width: 1024px) {
-  .products-page__grid {
+  .pets-page__grid {
     grid-template-columns: repeat(2, 1fr);
   }
 }
 
 @media (max-width: 600px) {
-  .products-page__grid {
+  .pets-page__grid {
     grid-template-columns: 1fr;
   }
 }

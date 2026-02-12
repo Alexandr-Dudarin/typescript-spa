@@ -7,14 +7,14 @@ const Layout = () => {
         <div className="app">
             <header className="app__header">
                 <div className="app__header-content">
-                    <Link to="/products" className="app__logo">
+                    <Link to="/pets" className="app__logo">
                         <BiSolidDog className="app__logo-icon" />
                         Dog journal
                     </Link>
 
                     <nav className="app__nav">
-                        <Link to="/products">Products</Link>
-                        <Link to="/create-product">Create</Link>
+                        <Link to="/pets">Pets</Link>
+                        <Link to="/create-pet">Create</Link>
                     </nav>
                 </div>
             </header>

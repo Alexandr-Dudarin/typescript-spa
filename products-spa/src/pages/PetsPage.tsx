@@ -1,36 +1,36 @@
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { fetchProducts } from '../api/productsApi';
-import { setProducts, setFilter, setSearch, setPage } from '../features/products/productsSlice';
+import { fetchPets } from '../api/petsApi';
+import { setPets, setFilter, setSearch, setPage } from '../features/pets/petsSlice';
 import type { RootState } from '../app/store';
-import ProductCard from '../components/ProductCard';
+import PetCard from '../components/PetCard';
 import { useNavigate } from 'react-router-dom';
 import type { AppDispatch } from '../app/store';
-import './ProductsPage.css';
+import './PetsPage.css';
 
 
-const ProductsPage = () => {
+const PetsPage = () => {
     const dispatch = useDispatch<AppDispatch>();
     const navigate = useNavigate();
-    const { items, filter, search, page, pageSize } = useSelector((s: RootState) => s.products);
+    const { items, filter, search, page, pageSize } = useSelector((s: RootState) => s.pets);
 
 
     useEffect(() => {
         if (items.length === 0) {
-            fetchProducts().then(data => dispatch(setProducts(data)));
+            fetchPets().then(data => dispatch(setPets(data)));
         }
     }, [dispatch, items.length]);
 
 
-    const filteredProducts = items
+    const filteredPets = items
         .filter(p => (filter === 'favorites' ? p.liked : true))
         .filter(p =>
             p.title.toLowerCase().includes(search.toLowerCase())
         );
 
-    const totalPages = Math.ceil(filteredProducts.length / pageSize) || 0;
+    const totalPages = Math.ceil(filteredPets.length / pageSize) || 0;
 
-    const paginatedProducts = filteredProducts.slice(
+    const paginatedPets = filteredPets.slice(
         (page - 1) * pageSize,
         page * pageSize
     );
@@ -40,31 +40,31 @@ const ProductsPage = () => {
 
 
     return (
-        <div className="products-page">
+        <div className="pets-page">
             <h1>Pets</h1>
 
-            <div className="products-page__controls">
+            <div className="pets-page__controls">
                 <input
                     type="text"
                     placeholder="Search by title..."
                     value={search}
                     onChange={e => dispatch(setSearch(e.target.value))}
-                    className="products-page__search" />
+                    className="pets-page__search" />
 
                 <button className={`button ${filter === 'all' ? 'button--active' : ''}`}
                     onClick={() => dispatch(setFilter('all'))}>All</button>
                 <button className={`button ${filter === 'favorites' ? 'button--active' : ''}`}
                     onClick={() => dispatch(setFilter('favorites'))}>Favorites</button>
-                <button className="button button--primary" onClick={() => navigate('/create-product')}>Create</button>
+                <button className="button button--primary" onClick={() => navigate('/create-pet')}>Create</button>
             </div>
 
-            <div className="products-page__grid">
-                {paginatedProducts.map(p => (
-                    <ProductCard key={p.id} product={p} />
+            <div className="pets-page__grid">
+                {paginatedPets.map(p => (
+                    <PetCard key={p.id} pet={p} />
                 ))}
             </div>
 
-            <div className="products-page__pagination">
+            <div className="pets-page__pagination">
                 <button
                     className="button"
                     disabled={page === 1}
@@ -90,4 +90,4 @@ const ProductsPage = () => {
     );
 };
 
-export default ProductsPage;
+export default PetsPage;

@@ -1,11 +1,11 @@
 import { createSlice } from '@reduxjs/toolkit';
 import type { PayloadAction } from '@reduxjs/toolkit';
-import type { Product } from './types';
+import type { Pet } from './types';
 
 export type Filter = 'all' | 'favorites';
 
-interface ProductsState {
-  items: Product[];
+interface PetsState {
+  items: Pet[];
   filter: Filter;
   search: string;
   page: number;
@@ -13,7 +13,7 @@ interface ProductsState {
 }
 
 
-const initialState: ProductsState = {
+const initialState: PetsState = {
   items: [],
   filter: 'all',
   search: '',
@@ -23,21 +23,21 @@ const initialState: ProductsState = {
 
 
 
-const productsSlice = createSlice({
-  name: 'products',
+const petsSlice = createSlice({
+  name: 'pets',
   initialState,
   reducers: {
-    setProducts(state, action: PayloadAction<Product[]>) {
+    setPets(state, action: PayloadAction<Pet[]>) {
       state.items = action.payload;
     },
-    addProduct(state, action: PayloadAction<Product>) {
+    addPet(state, action: PayloadAction<Pet>) {
       state.items.unshift(action.payload);
     },
     toggleLike(state, action: PayloadAction<string>) {
       const product = state.items.find(p => p.id === action.payload);
       if (product) product.liked = !product.liked;
     },
-    deleteProduct(state, action: PayloadAction<string>) {
+    deletePet(state, action: PayloadAction<string>) {
       state.items = state.items.filter(p => p.id !== action.payload);
     },
     setFilter(state, action: PayloadAction<Filter>) {
@@ -54,13 +54,13 @@ const productsSlice = createSlice({
 });
 
 export const {
-  setProducts,
-  addProduct,
+  setPets,
+  addPet,
   toggleLike,
-  deleteProduct,
+  deletePet,
   setFilter,
   setSearch,
   setPage
-} = productsSlice.actions;
+} = petsSlice.actions;
 
-export default productsSlice.reducer;
+export default petsSlice.reducer;

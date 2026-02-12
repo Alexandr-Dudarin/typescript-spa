@@ -1,6 +1,6 @@
-import type { Product } from '../features/products/types';
+import type { Pet } from '../features/pets/types';
 
-export async function fetchProducts(): Promise<Product[]> {
+export async function fetchPets(): Promise<Pet[]> {
   const res = await fetch('https://dog.ceo/api/breeds/image/random/12');
   const data = await res.json();
 
