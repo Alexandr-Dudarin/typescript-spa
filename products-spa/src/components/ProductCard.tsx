@@ -2,6 +2,8 @@ import type { Product } from '../features/products/types';
 import { useDispatch } from 'react-redux';
 import { toggleLike, deleteProduct } from '../features/products/productsSlice';
 import { useNavigate } from 'react-router-dom';
+import './ProductCard.css';
+
 
 interface Props {
   product: Product;
@@ -14,24 +16,14 @@ const ProductCard = ({ product }: Props) => {
   return (
     <div
       onClick={() => navigate(`/products/${product.id}`)}
-      style={{
-        border: '1px solid #ccc',
-        padding: 12,
-        cursor: 'pointer',
-      }}
     >
-      <img src={product.image} alt="" width={100} />
+      <img src={product.image} 
+      alt={product.title}
+      className="product-card__image" />
 
       <h3>{product.title}</h3>
 
-      <p
-        style={{
-          overflow: 'hidden',
-          display: '-webkit-box',
-          WebkitLineClamp: 3,
-          WebkitBoxOrient: 'vertical',
-        }}
-      >
+<p className="product-card__description">
         {product.description}
       </p>
 

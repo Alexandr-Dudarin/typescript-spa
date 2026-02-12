@@ -1,6 +1,8 @@
 import { useParams, useNavigate } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import type { RootState } from '../app/store';
+import './ProductPage.css';
+
 
 const ProductPage = () => {
   const { id } = useParams();
@@ -17,7 +19,7 @@ const ProductPage = () => {
       <button onClick={() => navigate('/products')}>Back</button>
 
       <h2>{product.title}</h2>
-      <img src={product.image} width={200} />
+      <img src={product.image} className="product-page__image" />
       <p>{product.description}</p>
     </div>
   );

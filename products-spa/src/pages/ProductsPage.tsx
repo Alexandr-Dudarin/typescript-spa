@@ -6,6 +6,8 @@ import type { RootState } from '../app/store';
 import ProductCard from '../components/ProductCard';
 import { useNavigate } from 'react-router-dom';
 import type { AppDispatch } from '../app/store';
+import './ProductsPage.css';
+
 
 const ProductsPage = () => {
     const dispatch = useDispatch<AppDispatch>();
@@ -36,44 +38,29 @@ const ProductsPage = () => {
 
 
     return (
-        <div>
+        <div className="products-page">
             <h1>Products</h1>
-            <input
-                type="text"
-                placeholder="Search by title..."
-                value={search}
-                onChange={e => {
-                    dispatch(setSearch(e.target.value));
-                    dispatch(setPage(1));
-                }}
 
-                style={{ marginBottom: 16, padding: 8 }}
-            />
+            <div className="products-page__controls">
+                <input
+                    type="text"
+                    placeholder="Search by title..."
+                    value={search}
+                    onChange={e => dispatch(setSearch(e.target.value))}
+                    className="products-page__search" />
 
+                <button className={filter === 'all' ? 'active' : ''} onClick={() => dispatch(setFilter('all'))}>All</button>
+                <button className={filter === 'favorites' ? 'active' : ''} onClick={() => dispatch(setFilter('favorites'))}>Favorites</button>
+                <button className="button button--primary" onClick={() => navigate('/create-product')}>Create</button>
+            </div>
 
-            <button onClick={() => {
-                dispatch(setFilter('all'));
-                dispatch(setPage(1));
-            }}>
-                All
-            </button>
-
-            <button onClick={() => {
-                dispatch(setFilter('favorites'));
-                dispatch(setPage(1));
-            }}>
-                Favorites
-            </button>
-
-            <button onClick={() => navigate('/create-product')}>Create</button>
-
-            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: 16 }}>
+            <div className="products-page__grid">
                 {paginatedProducts.map(p => (
                     <ProductCard key={p.id} product={p} />
                 ))}
             </div>
 
-            <div style={{ marginTop: 24 }}>
+            <div className="products-page__pagination">
                 <button
                     disabled={page === 1}
                     onClick={() => dispatch(setPage(page - 1))}
@@ -81,8 +68,8 @@ const ProductsPage = () => {
                     Prev
                 </button>
 
-                <span style={{ margin: '0 12px' }}>
-                    Page {page} of {totalPages}
+                <span>
+                    Page {totalPages === 0 ? 0 : page} of {totalPages}
                 </span>
 
                 <button
