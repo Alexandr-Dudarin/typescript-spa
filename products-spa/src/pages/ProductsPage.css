@@ -60,3 +60,15 @@
   color: white;
   border-color: #4caf50;
 }
+
+@media (max-width: 1024px) {
+  .products-page__grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 600px) {
+  .products-page__grid {
+    grid-template-columns: 1fr;
+  }
+}
