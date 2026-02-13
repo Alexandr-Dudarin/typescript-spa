@@ -10,6 +10,8 @@ interface PetsState {
   search: string;
   page: number;
   pageSize: number;
+  loading: boolean;
+  error: string | null;
 }
 
 const loadState = (): PetsState => {
@@ -28,6 +30,8 @@ const loadState = (): PetsState => {
     search: '',
     page: 1,
     pageSize: 8,
+    loading: false,
+    error: null,
   };
 };
 
@@ -52,13 +56,22 @@ const petsSlice = createSlice({
     },
     setFilter(state, action: PayloadAction<Filter>) {
       state.filter = action.payload;
+      state.page = 1;
     },
     setSearch(state, action: PayloadAction<string>) {
       state.search = action.payload;
+      state.page = 1;
     },
     setPage(state, action: PayloadAction<number>) {
       state.page = action.payload;
-},
+    },
+    setLoading(state, action: PayloadAction<boolean>) {
+      state.loading = action.payload;
+    },
+    setError(state, action: PayloadAction<string | null>) {
+      state.error = action.payload;
+    },
+
 
   },
 });
@@ -70,7 +83,9 @@ export const {
   deletePet,
   setFilter,
   setSearch,
-  setPage
+  setPage,
+  setLoading,
+  setError,
 } = petsSlice.actions;
 
 export default petsSlice.reducer;

@@ -6,19 +6,33 @@ import type { RootState } from '../app/store';
 import PetCard from '../components/PetCard';
 import { useNavigate } from 'react-router-dom';
 import type { AppDispatch } from '../app/store';
+import { setLoading, setError } from '../features/pets/petsSlice';
 import './PetsPage.css';
 
 
 const PetsPage = () => {
     const dispatch = useDispatch<AppDispatch>();
     const navigate = useNavigate();
-    const { items, filter, search, page, pageSize } = useSelector((s: RootState) => s.pets);
+    const { items, filter, search, page, pageSize, loading, error } = useSelector((s: RootState) => s.pets);
 
     const [localSearch, setLocalSearch] = useState(search);
 
     useEffect(() => {
+        const loadPets = async () => {
+            try {
+                dispatch(setLoading(true));
+                dispatch(setError(null));
+
+                const data = await fetchPets();
+                dispatch(setPets(data));
+            } catch (err) {
+                dispatch(setError('Failed to load pets'));
+            } finally {
+                dispatch(setLoading(false));
+            }
+        };
         if (items.length === 0) {
-            fetchPets().then(data => dispatch(setPets(data)));
+            loadPets();
         }
     }, [dispatch, items.length]);
 
@@ -66,16 +80,23 @@ const PetsPage = () => {
                 <button className="button button--primary" onClick={() => navigate('/create-pet')}>Create</button>
             </div>
 
-            <div className="pets-page__grid">
-                {paginatedPets.map(p => (
-                    <PetCard key={p.id} pet={p} />
-                ))}
-            </div>
+            {loading && <p className="pets-page__loading">Loading pets...</p>}
+
+            {error && <p className="pets-page__error">{error}</p>}
+
+            {!loading && !error && (
+
+                <div className="pets-page__grid">
+                    {paginatedPets.map(p => (
+                        <PetCard key={p.id} pet={p} />
+                    ))}
+                </div>
+            )}
 
             <div className="pets-page__pagination">
                 <button
                     className="button"
-                    disabled={page === 1}
+                    disabled={loading || page === 1}
                     onClick={() => dispatch(setPage(page - 1))}
                 >
                     Prev
@@ -87,7 +108,7 @@ const PetsPage = () => {
 
                 <button
                     className="button"
-                    disabled={page === totalPages || totalPages === 0}
+                    disabled={loading || page === totalPages || totalPages === 0}
                     onClick={() => dispatch(setPage(page + 1))}
                 >
                     Next
