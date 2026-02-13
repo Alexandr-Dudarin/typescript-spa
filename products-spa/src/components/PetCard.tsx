@@ -15,35 +15,40 @@ const PetCard = ({ pet }: Props) => {
 
   return (
     <div
+      className="pet-card"
       onClick={() => navigate(`/pets/${pet.id}`)}
     >
-      <img src={pet.image} 
-      alt={pet.title}
-      className="pet-card__image" />
+      <img src={pet.image}
+        alt={pet.title}
+        className="pet-card__image" />
 
-      <h3>{pet.title}</h3>
+      <div className="pet-card__content">
+        <h3>{pet.title}</h3>
 
-<p className="pet-card__description">
-        {pet.description}
-      </p>
+        <p className="pet-card__description">
+          {pet.description}
+        </p>
 
-      <button
-        onClick={e => {
-          e.stopPropagation();
-          dispatch(toggleLike(pet.id));
-        }}
-      >
-        {pet.liked ? '❤️' : '🤍'}
-      </button>
+        <div className="pet-card__actions">
+          <button
+            onClick={e => {
+              e.stopPropagation();
+              dispatch(toggleLike(pet.id));
+            }}
+          >
+            {pet.liked ? '❤️' : '🤍'}
+          </button>
 
-      <button
-        onClick={e => {
-          e.stopPropagation();
-          dispatch(deletePet(pet.id));
-        }}
-      >
-        🗑
-      </button>
+          <button
+            onClick={e => {
+              e.stopPropagation();
+              dispatch(deletePet(pet.id));
+            }}
+          >
+            🗑
+          </button>
+        </div>
+      </div>
     </div>
   );
 };
