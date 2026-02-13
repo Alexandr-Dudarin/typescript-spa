@@ -7,6 +7,7 @@ import PetCard from '../components/PetCard';
 import { useNavigate } from 'react-router-dom';
 import type { AppDispatch } from '../app/store';
 import { setLoading, setError } from '../features/pets/petsSlice';
+import SkeletonGrid from '../components/SkeletonGrid';
 import './PetsPage.css';
 
 
@@ -80,7 +81,7 @@ const PetsPage = () => {
                 <button className="button button--primary" onClick={() => navigate('/create-pet')}>Create</button>
             </div>
 
-            {loading && <p className="pets-page__loading">Loading pets...</p>}
+            {loading && <SkeletonGrid count={pageSize} />}
 
             {error && <p className="pets-page__error">{error}</p>}
 
