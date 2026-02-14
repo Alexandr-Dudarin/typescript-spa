@@ -39,6 +39,12 @@
   margin: 20px 0;
 }
 
+.pets-page__empty {
+  margin-top: 40px;
+  font-size: 18px;
+  opacity: 0.6;
+}
+
 @media (max-width: 1024px) {
   .pets-page__grid {
     grid-template-columns: repeat(2, 1fr);

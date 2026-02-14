@@ -16,6 +16,11 @@ const PetsPage = () => {
     const navigate = useNavigate();
     const { items, filter, search, page, pageSize, loading, error } = useSelector((s: RootState) => s.pets);
 
+    useEffect(() => {
+        dispatch(setPage(1));
+    }, [search, filter, dispatch]);
+
+
     const [localSearch, setLocalSearch] = useState(search);
 
     useEffect(() => {
@@ -86,12 +91,17 @@ const PetsPage = () => {
             {error && <p className="pets-page__error">{error}</p>}
 
             {!loading && !error && (
-
-                <div className="pets-page__grid">
-                    {paginatedPets.map(p => (
-                        <PetCard key={p.id} pet={p} />
-                    ))}
-                </div>
+                <>
+                    {filteredPets.length === 0 ? (
+                        <p className="pets-page__empty">No pets found</p>
+                    ) : (
+                        <div className="pets-page__grid">
+                            {paginatedPets.map(p => (
+                                <PetCard key={p.id} pet={p} />
+                            ))}
+                        </div>
+                    )}
+                </>
             )}
 
             <div className="pets-page__pagination">
