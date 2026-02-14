@@ -1,9 +1,11 @@
 import { configureStore } from '@reduxjs/toolkit';
 import petsReducer  from '../features/pets/petsSlice';
+import uiReducer from '../features/ui/uiSlice';
 
 export const store = configureStore({
   reducer: {
-    pets: petsReducer ,
+    pets: petsReducer,
+        ui: uiReducer,
   },
 });
 

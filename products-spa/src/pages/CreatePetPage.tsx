@@ -3,6 +3,7 @@ import { useDispatch } from 'react-redux';
 import { addPet } from '../features/pets/petsSlice';
 import { useNavigate } from 'react-router-dom';
 import type { AppDispatch } from '../app/store';
+import './CreatePetPage.css';
 
 interface FormData {
   title: string;
@@ -11,7 +12,11 @@ interface FormData {
 }
 
 const CreatePetPage = () => {
-  const { register, handleSubmit } = useForm<FormData>();
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<FormData>();
   const dispatch = useDispatch<AppDispatch>();
   const navigate = useNavigate();
 
@@ -30,7 +35,25 @@ const CreatePetPage = () => {
     <form onSubmit={handleSubmit(onSubmit)}>
       <h1>Create pet</h1>
 
-      <input {...register('title', { required: true })} placeholder="Title" />
+      <input
+        {...register('title', {
+          required: 'Title is required',
+          pattern: {
+            value: /^[^@!?%$]+$/,
+            message: 'Title contains forbidden characters',
+          },
+          minLength: {
+            value: 3,
+            message: 'Title must be at least 3 characters',
+          },
+        })}
+        placeholder="Title"
+      />
+      {errors.title && (
+        <p className="form-error">
+          {errors.title.message}
+        </p>
+      )}
       <input {...register('image', { required: true })} placeholder="Image URL" />
       <textarea {...register('description', { required: true })} placeholder="Description" />
 

@@ -1,5 +1,5 @@
 .pet-card {
-  background: #ffffff;
+  background: var(--card-bg);
   border-radius: 14px;
   overflow: hidden;
   cursor: pointer;
