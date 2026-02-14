@@ -40,6 +40,7 @@ const PetCard = ({ pet }: Props) => {
           </button>
 
           <button
+            className="pet-card__delete"
             onClick={e => {
               e.stopPropagation();
               dispatch(deletePet(pet.id));

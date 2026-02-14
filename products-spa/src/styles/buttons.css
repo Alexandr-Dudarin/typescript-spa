@@ -1,8 +1,8 @@
 .button {
   padding: 8px 14px;
-  border: 1px solid #ccc;
-  background: white;
-  color: #222;
+  border: 1px solid var(--border-color);
+  background: var(--card-bg);
+  color: var(--text-color);
   cursor: pointer;
   border-radius: 6px;
   transition: background 0.2s ease, border-color 0.2s ease, transform 0.05s ease;
@@ -10,8 +10,8 @@
 }
 
 .button:hover:not(:disabled) {
-  background: #eaeaea;
-  border-color: #999;
+  background: var(--button-hover-bg);
+  border-color: var(--button-hover-border);
 }
 
 .button:active:not(:disabled) {
@@ -29,9 +29,9 @@
 }
 
 .button--active {
-  background: #222;
-  color: white;
-  border-color: #222;
+  background: var(--button-active-bg);
+  color: var(--button-active-text);
+  border-color: var(--button-active-bg);
 }
 
 .button--primary {

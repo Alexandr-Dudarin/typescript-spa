@@ -12,6 +12,7 @@ const Layout = () => {
 
     useEffect(() => {
         document.body.dataset.theme = theme;
+        localStorage.setItem('theme', theme);
     }, [theme]);
 
     return (

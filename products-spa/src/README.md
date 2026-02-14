@@ -30,11 +30,15 @@ Project Structure
 src/
  ├── api/
  ├── app/
+ │    └── store.ts
  ├── components/
  ├── features/
+ │    ├── pets/
+ │    └── ui/
  ├── layout/
  ├── pages/
- └── styles/
+ ├── styles/
+ └── main.tsx
 
 
 Installation

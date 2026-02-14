@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useMemo } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchPets } from '../api/petsApi';
 import { setPets, setFilter, setSearch, setPage } from '../features/pets/petsSlice';
@@ -54,18 +54,24 @@ const PetsPage = () => {
         setLocalSearch(search);
     }, [search]);
 
-    const filteredPets = items
-        .filter(p => (filter === 'favorites' ? p.liked : true))
-        .filter(p =>
-            p.title.toLowerCase().includes(search.toLowerCase())
+    const filteredPets = useMemo(() => {
+        return items
+            .filter(p => (filter === 'favorites' ? p.liked : true))
+            .filter(p =>
+                p.title.toLowerCase().includes(search.toLowerCase())
+            );
+    }, [items, filter, search]);
+
+    const totalPages = useMemo(() => {
+        return Math.ceil(filteredPets.length / pageSize) || 0;
+    }, [filteredPets, pageSize]);
+
+    const paginatedPets = useMemo(() => {
+        return filteredPets.slice(
+            (page - 1) * pageSize,
+            page * pageSize
         );
-
-    const totalPages = Math.ceil(filteredPets.length / pageSize) || 0;
-
-    const paginatedPets = filteredPets.slice(
-        (page - 1) * pageSize,
-        page * pageSize
-    );
+    }, [filteredPets, page, pageSize]);
 
     return (
         <div className="pets-page">

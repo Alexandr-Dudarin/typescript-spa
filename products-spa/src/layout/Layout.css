@@ -5,8 +5,8 @@
 }
 
 .app__header {
-  background: #222;
-  color: white;
+  background: var(--header-bg);
+  color: var(--header-text);
   padding: 16px 0;
 }
 
@@ -20,16 +20,9 @@
   align-items: center;
 }
 
-.app__logo {
-  font-size: 20px;
-  font-weight: bold;
-  color: white;
-  text-decoration: none;
-}
-
 .app__nav a {
   margin-left: 16px;
-  color: white;
+  color: var(--header-text);
   text-decoration: none;
   font-size: 14px;
 }
@@ -52,10 +45,19 @@
   font-size: 20px;
   font-weight: 600;
   text-decoration: none;
-  color: #ffffff;
+  color: var(--header-text);
 }
 
 .app__logo-icon {
   font-size: 26px;
   color: #8aa530;
+}
+
+.theme-toggle {
+  width: 40px;
+  height: 40px;
+  font-size: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }

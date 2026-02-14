@@ -1,5 +1,5 @@
 .skeleton-card {
-  background: #f2f2f2;
+  background: var(--skeleton-bg);
   border-radius: 14px;
   overflow: hidden;
   padding: 16px;
@@ -16,7 +16,7 @@
 
 .skeleton-text {
   height: 16px;
-  background: #e0e0e0;
+  background: var(--skeleton-bg);
   border-radius: 6px;
   margin-bottom: 8px;
 }
