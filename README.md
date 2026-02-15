@@ -132,5 +132,11 @@ Production-like project structure
 👨‍💻 Author
 
 Alexander Dudarin
+
 Frontend Developer
+<<<<<<< HEAD
 [т.me/Dudarin23](https://t.me/Dudarin23)
+=======
+
+[Мой Telegram](https://t.me/Dudarin23)
+>>>>>>> beb55009210ce61e497d53c237e2c74ddfea1a5e
