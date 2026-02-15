@@ -2,11 +2,15 @@
 
 Single Page Application for browsing, creating and managing pets.
 
-🔗 Live Demo:
+🔗 Live Demo  
+https://alexandr-dudarin.github.io/typescript-spa
 
-🔗 Repository:https://github.com/Alexandr-Dudarin/typescript-spa
+🔗 Repository  
+https://github.com/Alexandr-Dudarin/typescript-spa
 
-✨ Features
+---
+
+## ✨ Features
 
 - Fetch pets from external API
 - Like / Unlike pets
@@ -18,8 +22,12 @@ Single Page Application for browsing, creating and managing pets.
 - Dynamic routing
 - Light / Dark theme (persisted in localStorage)
 - Fully responsive layout
+- PWA installable
+- SEO preview for social links
 
-🛠 Tech Stack
+---
+
+## 🛠 Tech Stack
 
 - React
 - TypeScript
@@ -28,29 +36,34 @@ Single Page Application for browsing, creating and managing pets.
 - Vite
 - CSS (Design system with variables)
 
-🧠 Architecture Highlights
+---
+
+## 🧠 Architecture Highlights
 
 - Feature-based scalable folder structure
 - Global state management with Redux Toolkit
-- UI state isolated in `features/ui`
+- UI state isolated in features/ui
 - Memoized selectors for performance
 - Reusable UI component system
 - Persistent application theme
 - Separation of data, UI and business logic
 
-📁 Project Structure
+---
 
+## 📁 Project Structure
+
+```text
 src/
-├─ api/            # API requests
-├─ app/            # store & router
-├─ components/     # reusable components
-├─ features/       # Redux slices
+├─ api/           # API requests
+├─ app/           # store & router
+├─ components/    # reusable components
+├─ features/
 │  ├─ pets/
 │  └─ ui/
-├─ layout/         # app layout
-├─ pages/          # route pages
-├─ index.css       # global styles & design tokens
-└─ main.tsx        # app entry point
+├─ layout/        # app layout
+├─ pages/         # route pages
+├─ index.css      # global styles & design tokens
+└─ main.tsx       # app entry point
 
 
 🚀 Getting Started
@@ -64,15 +77,10 @@ Build
 npm run build
 
 🌐 Deployment
-
 The app is deployed using GitHub Pages.
-
 npm run deploy
 
 🔌 API
-
-Data is fetched from:
-
 https://dog.ceo/dog-api/
 
 🎨 UI & Theming
@@ -86,6 +94,10 @@ Theme persistence via localStorage
 Reusable Button component with variants
 
 Skeleton loaders for better UX
+
+📱 PWA
+
+The application can be installed as a standalone app.
 
 📌 Future Improvements
 
@@ -121,4 +133,4 @@ Production-like project structure
 
 Alexander Dudarin
 Frontend Developer
-t.me/Dudarin23
+[т.me/Dudarin23](https://t.me/Dudarin23)

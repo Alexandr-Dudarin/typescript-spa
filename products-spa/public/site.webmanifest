@@ -1,0 +1,25 @@
+{
+    "name": "Products SPA",
+    "short_name": "Pets",
+    "start_url": "/typescript-spa/",
+    "display": "standalone",
+    "background_color": "#ffffff",
+    "theme_color": "#ffffff",
+    "icons": [
+        {
+            "src": "/typescript-spa/dog-face-svgrepo-com.svg",
+            "sizes": "any",
+            "type": "image/svg+xml"
+        },
+        {
+            "src": "/typescript-spa/apple-touch-icon.png",
+            "sizes": "180x180",
+            "type": "image/png"
+        },
+        {
+            "src": "/typescript-spa/pwa-512.png",
+            "sizes": "512x512",
+            "type": "image/png"
+        }
+    ]
+}
