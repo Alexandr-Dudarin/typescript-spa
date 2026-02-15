@@ -31,6 +31,9 @@
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   --ghost-hover-bg: rgba(255, 255, 255, 0.1);
+
+  --link-color: #646cff;
+  --link-hover-color: #535bf2;
 }
 
 body[data-theme="dark"] {
@@ -50,16 +53,18 @@ body[data-theme="dark"] {
   --input-focus-border: #ffffff;
   --input-focus-ring: #ffafff25;
   --ghost-hover-bg: rgba(0, 0, 0, 0.06);
+  --link-color: #9aa8ff;
+  --link-hover-color: #c2caff;
 }
 
 a {
   font-weight: 500;
-  color: #646cff;
+  color: var(--link-color);
   text-decoration: inherit;
 }
 
 a:hover {
-  color: #535bf2;
+  color: var(--link-hover-color);
 }
 
 body {
@@ -76,7 +81,8 @@ h1 {
   line-height: 1.1;
 }
 
-input {
+input,
+textarea {
   padding: 12px 16px;
   border: 1px solid var(--border-color);
   border-radius: 12px;
@@ -87,11 +93,24 @@ input {
   transition: border 0.2s ease, box-shadow 0.2s ease;
 }
 
-input:hover {
+input:hover,
+textarea:hover {
   border-color: var(--input-hover-border);
 }
 
-input:focus {
+input:focus,
+textarea:focus {
   border-color: var(--input-focus-border);
   box-shadow: 0 0 0 2px var(--input-focus-ring);
+}
+
+textarea {
+  resize: none;
+  min-height: 44px;
+  overflow: hidden;
+}
+
+label {
+  font-size: 13px;
+  opacity: 0.7;
 }

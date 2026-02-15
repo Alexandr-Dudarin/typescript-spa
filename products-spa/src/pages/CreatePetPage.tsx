@@ -1,4 +1,5 @@
 import { useForm } from 'react-hook-form';
+import { useRef } from 'react';
 import { useDispatch } from 'react-redux';
 import { addPet } from '../features/pets/petsSlice';
 import { useNavigate } from 'react-router-dom';
@@ -21,6 +22,16 @@ const CreatePetPage = () => {
   const dispatch = useDispatch<AppDispatch>();
   const navigate = useNavigate();
 
+  const textareaRef = useRef<HTMLTextAreaElement | null>(null);
+
+  const autoGrow = () => {
+    const el = textareaRef.current;
+    if (!el) return;
+
+    el.style.height = '44px';
+    el.style.height = el.scrollHeight + 'px';
+  };
+
   const onSubmit = (data: FormData) => {
     dispatch(
       addPet({
@@ -33,37 +44,73 @@ const CreatePetPage = () => {
   };
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)}>
+    <form onSubmit={handleSubmit(onSubmit)} className="pet-form">
       <h1>Create pet</h1>
 
-      <input
-        {...register('title', {
-          required: 'Title is required',
-          pattern: {
-            value: /^[^@!?%$]+$/,
-            message: 'Title contains forbidden characters',
-          },
-          minLength: {
-            value: 3,
-            message: 'Title must be at least 3 characters',
-          },
-        })}
-        placeholder="Title"
-      />
-      {errors.title && (
-        <p className="form-error">
-          {errors.title.message}
-        </p>
-      )}
-      <input {...register('image', { required: true })} placeholder="Image URL" />
-      <textarea {...register('description', { required: true })} placeholder="Description" />
+      <div className="form-row">
 
-      <Button variant="primary" onClick={() => navigate('/create-pet')}>
-        Create
-      </Button>
+        <div className="form-field">
+          <label htmlFor="title">Title</label>
+          <input
+            id="title"
+            placeholder="Title"
+            {...register('title', {
+              required: 'Title is required',
+              pattern: {
+                value: /^[^@!?%$]+$/,
+                message: 'Title contains forbidden characters',
+              },
+              minLength: {
+                value: 3,
+                message: 'Title must be at least 3 characters',
+              },
+            })}
+          />
+          {errors.title && (
+            <p className="form-error">{errors.title.message}</p>
+          )}
+        </div>
 
+        <div className="form-field">
+          <label htmlFor="image">Image URL</label>
+          <input
+            id="image"
+            placeholder="Image URL"
+            {...register('image', { required: 'Image is required' })}
+          />
+          {errors.image && (
+            <p className="form-error">{errors.image.message}</p>
+          )}
+        </div>
+
+        <div className="form-field">
+          <label htmlFor="description">Description</label>
+          <textarea
+            id="description"
+            placeholder="Description"
+            {...register('description', {
+              required: 'Description is required',
+            })}
+            ref={(e) => {
+              register('description').ref(e);
+              textareaRef.current = e;
+            }}
+            onInput={autoGrow}
+          />
+
+          {errors.description && (
+            <p className="form-error">{errors.description.message}</p>
+          )}
+        </div>
+
+        <Button type="submit" variant="primary">
+          Create
+        </Button>
+
+      </div>
     </form>
   );
+
 };
 
 export default CreatePetPage;
