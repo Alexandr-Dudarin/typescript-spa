@@ -14,7 +14,7 @@ if (savedTheme) {
 ReactDOM.createRoot(document.getElementById('root')!).render(
   <React.StrictMode>
     <Provider store={store}>
-      <BrowserRouter>
+      <BrowserRouter basename="/typescript-spa">
         <App />
       </BrowserRouter>
     </Provider>

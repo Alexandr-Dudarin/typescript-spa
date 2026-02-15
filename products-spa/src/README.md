@@ -2,8 +2,9 @@
 
 Single Page Application for browsing, creating and managing pets.
 
-🔗 Live Demo:
-🔗 Repository:
+🔗 Live Demo: https://alexandr-dudarin.github.io/typescript-spa/pets
+
+🔗 Repository: https://github.com/Alexandr-Dudarin/typescript-spa
 
 ✨ Features
 
