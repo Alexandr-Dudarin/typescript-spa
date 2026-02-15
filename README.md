@@ -2,7 +2,7 @@
 
 Single Page Application for browsing, creating and managing pets.
 
-🔗 Live Demo:
+🔗 Live Demo:https://alexandr-dudarin.github.io/typescript-spa
 
 🔗 Repository:https://github.com/Alexandr-Dudarin/typescript-spa
 
@@ -120,5 +120,7 @@ Production-like project structure
 👨‍💻 Author
 
 Alexander Dudarin
+
 Frontend Developer
-t.me/Dudarin23
+
+[Мой Telegram](https://t.me/Dudarin23)
