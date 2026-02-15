@@ -18,6 +18,8 @@
   --button-active-text: #ffffff;
 
   --button-hover-bg: #eaeaeaf8;
+  --accent: #4caf50;
+  --danger: #f44336;
   --button-hover-border: #9a9898;
 
   --input-hover-border: #bdbdbd;
@@ -28,6 +30,7 @@
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  --ghost-hover-bg: rgba(255, 255, 255, 0.1);
 }
 
 body[data-theme="dark"] {
@@ -46,6 +49,7 @@ body[data-theme="dark"] {
   --input-hover-border: #565454;
   --input-focus-border: #ffffff;
   --input-focus-ring: #ffafff25;
+  --ghost-hover-bg: rgba(0, 0, 0, 0.06);
 }
 
 a {

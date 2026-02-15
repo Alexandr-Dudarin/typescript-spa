@@ -1,0 +1,58 @@
+.button {
+    padding: 8px 14px;
+    border-radius: 8px;
+    border: 1px solid var(--border-color);
+    background: var(--card-bg);
+    color: var(--text-color);
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.button:hover:not(:disabled) {
+    background: var(--button-hover-bg);
+}
+
+.button:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+.primary {
+    background: var(--accent);
+    color: #fff;
+    border-color: var(--accent);
+}
+
+.danger {
+    background: var(--danger);
+    color: #fff;
+    border-color: var(--danger);
+}
+
+.ghost {
+    background: transparent;
+    border-color: transparent;
+    color: inherit;
+}
+
+.active {
+    background: var(--button-active-bg);
+    color: var(--button-active-text);
+    border-color: var(--button-active-bg);
+}
+
+.icon {
+  padding: 6px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.ghost:hover:not(:disabled) {
+  background: var(--ghost-hover-bg);
+}
+
+.button svg {
+  width: 20px;
+  height: 20px;
+}

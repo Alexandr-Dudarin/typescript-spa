@@ -1,62 +1,123 @@
-Pet Journal SPA
+🐶 Pet Journal SPA
 
+Single Page Application for browsing, creating and managing pets.
 
-Single Page Application with dogs.
+🔗 Live Demo:
+🔗 Repository:
 
+✨ Features
 
-Tech Stack:
+- Fetch pets from external API
+- Like / Unlike pets
+- Create new pet
+- Delete pets
+- Search by title (debounced)
+- Pagination
+- Skeleton loaders
+- Dynamic routing
+- Light / Dark theme (persisted in localStorage)
+- Fully responsive layout
 
-React
-TypeScript
-Redux Toolkit
-React Router
-CSS
-Vite
-REST API integration
+🛠 Tech Stack
 
+- React
+- TypeScript
+- Redux Toolkit
+- React Router
+- Vite
+- CSS (Design system with variables)
 
-Features
+🧠 Architecture Highlights
 
-Fetch pets from external API
-Like / Unlike pets
-Delete pets
-Create new pet
-Search by title
-Pagination
-Routing with dynamic pages
+- Feature-based scalable folder structure
+- Global state management with Redux Toolkit
+- UI state isolated in `features/ui`
+- Memoized selectors for performance
+- Reusable UI component system
+- Persistent application theme
+- Separation of data, UI and business logic
 
+📁 Project Structure
 
-Project Structure
 src/
- ├── api/
- ├── app/
- │    └── store.ts
- ├── components/
- ├── features/
- │    ├── pets/
- │    └── ui/
- ├── layout/
- ├── pages/
- ├── styles/
- └── main.tsx
+├─ api/            # API requests
+├─ app/            # store & router
+├─ components/     # reusable components
+├─ features/       # Redux slices
+│  ├─ pets/
+│  └─ ui/
+├─ layout/         # app layout
+├─ pages/          # route pages
+├─ index.css       # global styles & design tokens
+└─ main.tsx        # app entry point
 
 
-Installation
+🚀 Getting Started
+Install dependencies
+
 npm install
+Run locally
 npm run dev
 
+Build
+npm run build
 
-API Used
+🌐 Deployment
+
+The app is deployed using GitHub Pages.
+
+npm run deploy
+
+🔌 API
+
+Data is fetched from:
 
 https://dog.ceo/dog-api/
 
+🎨 UI & Theming
 
-Purpose
+CSS variables as a design system
 
-The goal of this project was to practice:
+Light / Dark mode
+
+Theme persistence via localStorage
+
+Reusable Button component with variants
+
+Skeleton loaders for better UX
+
+📌 Future Improvements
+
+Edit pet page
+
+Form validation
+
+Unit tests
+
+Error boundaries
+
+Accessibility improvements
+
+i18n
+
+🎯 Purpose of the Project
+
+This project was built to practice:
 
 Scalable React architecture
+
+Type-safe development
+
 State management with Redux Toolkit
-Type-safe development with TypeScript
+
 SPA routing
-UI state logic (pagination, filtering)
+
+Complex UI state handling
+
+Production-like project structure
+
+👨‍💻 Author
+
+Alexander Dudarin
+Frontend Developer
+t.me/Dudarin23

@@ -3,6 +3,7 @@ import { useDispatch } from 'react-redux';
 import { addPet } from '../features/pets/petsSlice';
 import { useNavigate } from 'react-router-dom';
 import type { AppDispatch } from '../app/store';
+import Button from '../features/ui/button';
 import './CreatePetPage.css';
 
 interface FormData {
@@ -57,7 +58,10 @@ const CreatePetPage = () => {
       <input {...register('image', { required: true })} placeholder="Image URL" />
       <textarea {...register('description', { required: true })} placeholder="Description" />
 
-      <button type="submit">Create</button>
+      <Button variant="primary" onClick={() => navigate('/create-pet')}>
+        Create
+      </Button>
+
     </form>
   );
 };

@@ -8,6 +8,7 @@ import { useNavigate } from 'react-router-dom';
 import type { AppDispatch } from '../app/store';
 import { setLoading, setError } from '../features/pets/petsSlice';
 import SkeletonGrid from '../components/SkeletonGrid';
+import Button from '../features/ui/button';
 import './PetsPage.css';
 
 
@@ -85,11 +86,23 @@ const PetsPage = () => {
                     onChange={e => setLocalSearch(e.target.value)}
                     className="pets-page__search" />
 
-                <button className={`button ${filter === 'all' ? 'button--active' : ''}`}
-                    onClick={() => dispatch(setFilter('all'))}>All</button>
-                <button className={`button ${filter === 'favorites' ? 'button--active' : ''}`}
-                    onClick={() => dispatch(setFilter('favorites'))}>Favorites</button>
-                <button className="button button--primary" onClick={() => navigate('/create-pet')}>Create</button>
+                <Button
+                    variant={filter === 'all' ? 'active' : 'default'}
+                    onClick={() => dispatch(setFilter('all'))}
+                >
+                    All
+                </Button>
+
+                <Button
+                    variant={filter === 'favorites' ? 'active' : 'default'}
+                    onClick={() => dispatch(setFilter('favorites'))}
+                >
+                    Favorites
+                </Button>
+
+                <Button variant="primary" onClick={() => navigate('/create-pet')}>
+                    Create
+                </Button>
             </div>
 
             {loading && <SkeletonGrid count={pageSize} />}
@@ -111,25 +124,24 @@ const PetsPage = () => {
             )}
 
             <div className="pets-page__pagination">
-                <button
-                    className="button"
+                <Button
                     disabled={loading || page === 1}
                     onClick={() => dispatch(setPage(page - 1))}
                 >
                     Prev
-                </button>
+                </Button>
+
 
                 <span>
                     Page {page} of {totalPages}
                 </span>
 
-                <button
-                    className="button"
+                <Button
                     disabled={loading || page === totalPages || totalPages === 0}
                     onClick={() => dispatch(setPage(page + 1))}
                 >
                     Next
-                </button>
+                </Button>
             </div>
 
         </div>

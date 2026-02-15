@@ -1,6 +1,7 @@
 import { useParams, useNavigate } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import type { RootState } from '../app/store';
+import Button from '../features/ui/button';
 import './PetPage.css';
 
 
@@ -16,7 +17,8 @@ const PetPage = () => {
 
   return (
     <div>
-      <button onClick={() => navigate('/pets')}>Back</button>
+      <Button variant="ghost"
+        onClick={() => navigate('/pets')}>Back</Button>
 
       <h2>{pet.title}</h2>
       <img src={pet.image} className="pet-page__image" />

@@ -2,6 +2,7 @@ import type { Pet } from '../features/pets/types';
 import { useDispatch } from 'react-redux';
 import { toggleLike, deletePet } from '../features/pets/petsSlice';
 import { useNavigate } from 'react-router-dom';
+import Button from '../features/ui/button';
 import './PetCard.css';
 
 
@@ -30,24 +31,26 @@ const PetCard = ({ pet }: Props) => {
         </p>
 
         <div className="pet-card__actions">
-          <button
+          <Button
+            variant="icon"
             onClick={e => {
               e.stopPropagation();
               dispatch(toggleLike(pet.id));
             }}
           >
             {pet.liked ? '❤️' : '🤍'}
-          </button>
+          </Button>
 
-          <button
-            className="pet-card__delete"
+
+          <Button
+            variant="icon"
             onClick={e => {
               e.stopPropagation();
               dispatch(deletePet(pet.id));
             }}
           >
             🗑
-          </button>
+          </Button>
         </div>
       </div>
     </div>

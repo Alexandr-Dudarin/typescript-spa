@@ -4,6 +4,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import type { RootState } from '../app/store';
 import { toggleTheme } from '../features/ui/uiSlice';
 import { useEffect } from 'react';
+import Button from '../features/ui/button';
+import { FiMoon, FiSun } from "react-icons/fi";
 import './Layout.css';
 
 const Layout = () => {
@@ -28,12 +30,11 @@ const Layout = () => {
                         <Link to="/pets">Pets</Link>
                         <Link to="/create-pet">Create</Link>
                     </nav>
-                    <button
-                        className="theme-toggle"
-                        onClick={() => dispatch(toggleTheme())}
-                    >
-                        {theme === 'light' ? '🌙' : '☀'}
-                    </button>
+                    <Button variant="ghost" onClick={() => dispatch(toggleTheme())}>
+                        {theme === 'light' ? <FiMoon /> : <FiSun />}
+                    </Button>
+
+
                 </div>
             </header>
 
