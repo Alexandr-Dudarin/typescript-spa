@@ -62,3 +62,9 @@
   justify-content: center;
   color: var(--header-text);
 }
+
+.app__nav a.active {
+  text-decoration: underline;
+  font-weight: 600;
+  pointer-events: none;
+}

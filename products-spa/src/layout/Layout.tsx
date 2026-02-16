@@ -1,4 +1,4 @@
-import { Outlet, Link } from 'react-router-dom';
+import { Outlet, Link, NavLink, useLocation } from 'react-router-dom';
 import { BiSolidDog } from "react-icons/bi";
 import { useDispatch, useSelector } from 'react-redux';
 import type { RootState } from '../app/store';
@@ -17,6 +17,13 @@ const Layout = () => {
         localStorage.setItem('theme', theme);
     }, [theme]);
 
+    const location = useLocation();
+
+    useEffect(() => {
+        window.scrollTo(0, 0);
+    }, [location.pathname]);
+
+
     return (
         <div className="app">
             <header className="app__header">
@@ -27,9 +34,21 @@ const Layout = () => {
                     </Link>
 
                     <nav className="app__nav">
-                        <Link to="/pets">Pets</Link>
-                        <Link to="/create-pet">Create</Link>
+                        <NavLink
+                            to="/pets"
+                            className={({ isActive }) => (isActive ? 'active' : undefined)}
+                        >
+                            Pets
+                        </NavLink>
+
+                        <NavLink
+                            to="/create-pet"
+                            className={({ isActive }) => (isActive ? 'active' : undefined)}
+                        >
+                            Create
+                        </NavLink>
                     </nav>
+
                     <Button variant="ghost" onClick={() => dispatch(toggleTheme())}>
                         {theme === 'light' ? <FiMoon /> : <FiSun />}
                     </Button>
