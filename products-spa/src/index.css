@@ -17,7 +17,7 @@
   --button-active-bg: #222222;
   --button-active-text: #ffffff;
 
-  --button-hover-bg: #f3f3f3;
+  --button-hover-bg: #A8C0D8;
   --accent: #4caf50;
   --danger: #f44336;
   --button-hover-border: #9a9898;
@@ -47,7 +47,7 @@ body[data-theme="dark"] {
   --header-text: #222222;
   --button-active-bg: #ffffff;
   --button-active-text: #101010f0;
-  --button-hover-bg: #2a2a2a;
+  --button-hover-bg: #B0B0B0;
   --button-hover-border: #4a4848;
   --input-hover-border: #565454;
   --input-focus-border: #ffffff;

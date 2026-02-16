@@ -8,15 +8,10 @@
   transition: background 0.2s, border-color 0.2s, transform 0.2s, filter 0.2s;
 }
 
-.button:hover:not(:disabled) {
-  transform: translateY(-1px);
-  filter: brightness(0.97);
-}
-
-.button:hover:not(:disabled):not(.primary):not(.danger):not(.ghost):not(.active) {
+.button:hover:not(:disabled):not(.primary):not(.danger):not(.ghost) {
   background: var(--button-hover-bg);
+  transform: translateY(-1px);
 }
-
 
 .primary {
     background: var(--accent);
@@ -45,9 +40,9 @@
   border-color: var(--button-active-bg);
 }
 
-.active:hover {
-  filter: brightness(0.95);
+.active:hover:not(:disabled) {
   transform: translateY(-1px);
+  filter: brightness(0.95);
 }
 
 .ghost {
