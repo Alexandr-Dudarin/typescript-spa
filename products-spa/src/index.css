@@ -17,7 +17,7 @@
   --button-active-bg: #222222;
   --button-active-text: #ffffff;
 
-  --button-hover-bg: #eaeaeaf8;
+  --button-hover-bg: #f3f3f3;
   --accent: #4caf50;
   --danger: #f44336;
   --button-hover-border: #9a9898;
@@ -30,7 +30,7 @@
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  --ghost-hover-bg: rgba(255, 255, 255, 0.1);
+  --ghost-hover-bg: rgba(0, 0, 0, 0.05);
 
   --link-color: #646cff;
   --link-hover-color: #535bf2;
@@ -52,7 +52,7 @@ body[data-theme="dark"] {
   --input-hover-border: #565454;
   --input-focus-border: #ffffff;
   --input-focus-ring: #ffafff25;
-  --ghost-hover-bg: rgba(0, 0, 0, 0.06);
+  --ghost-hover-bg: rgba(255, 255, 255, 0.08);
   --link-color: #9aa8ff;
   --link-hover-color: #c2caff;
 }

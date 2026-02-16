@@ -1,26 +1,32 @@
 .button {
-    padding: 8px 14px;
-    border-radius: 8px;
-    border: 1px solid var(--border-color);
-    background: var(--card-bg);
-    color: var(--text-color);
-    cursor: pointer;
-    transition: 0.2s;
+  padding: 8px 14px;
+  border-radius: 8px;
+  border: 1px solid var(--border-color);
+  background: var(--card-bg);
+  color: var(--text-color);
+  cursor: pointer;
+  transition: background 0.2s, border-color 0.2s, transform 0.2s, filter 0.2s;
 }
 
 .button:hover:not(:disabled) {
-    background: var(--button-hover-bg);
+  transform: translateY(-1px);
+  filter: brightness(0.97);
 }
 
-.button:disabled {
-    opacity: 0.5;
-    cursor: not-allowed;
+.button:hover:not(:disabled):not(.primary):not(.danger):not(.ghost):not(.active) {
+  background: var(--button-hover-bg);
 }
+
 
 .primary {
     background: var(--accent);
     color: #fff;
     border-color: var(--accent);
+}
+
+.primary:hover:not(:disabled) {
+    filter: brightness(0.95);
+    transform: translateY(-1px);
 }
 
 .danger {
@@ -29,30 +35,60 @@
     border-color: var(--danger);
 }
 
+.danger:hover:not(:disabled) {
+    filter: brightness(0.95);
+}
+
+.active {
+  background: var(--button-active-bg);
+  color: var(--button-active-text);
+  border-color: var(--button-active-bg);
+}
+
+.active:hover {
+  filter: brightness(0.95);
+  transform: translateY(-1px);
+}
+
 .ghost {
     background: transparent;
     border-color: transparent;
     color: inherit;
 }
 
-.active {
-    background: var(--button-active-bg);
-    color: var(--button-active-text);
-    border-color: var(--button-active-bg);
+.ghost:hover {
+    text-decoration: underline;
+}
+
+.button:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+.button:active:not(:disabled) {
+    transform: translateY(0);
+}
+
+.button:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 2px;
 }
 
 .icon {
-  padding: 6px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+    padding: 6px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .ghost:hover:not(:disabled) {
-  background: var(--ghost-hover-bg);
+    background: var(--ghost-hover-bg);
+    border-color: var(--border-color);
+    text-decoration: underline;
 }
 
+
 .button svg {
-  width: 20px;
-  height: 20px;
+    width: 20px;
+    height: 20px;
 }
