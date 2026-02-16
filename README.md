@@ -52,7 +52,7 @@ https://github.com/Alexandr-Dudarin/typescript-spa
 
 ## 📁 Project Structure
 
-```text
+```
 src/
 ├─ api/           # API requests
 ├─ app/           # store & router
@@ -64,6 +64,7 @@ src/
 ├─ pages/         # route pages
 ├─ index.css      # global styles & design tokens
 └─ main.tsx       # app entry point
+```
 
 
 🚀 Getting Started
@@ -98,6 +99,21 @@ Skeleton loaders for better UX
 📱 PWA
 
 The application can be installed as a standalone app.
+
+## 📱 Install the App
+
+### Desktop (Chrome / Edge)
+
+1. Open the website
+2. Click the install icon in the address bar
+
+### Mobile
+
+**iOS (Safari)**  
+Share → Add to Home Screen
+
+**Android (Chrome)**  
+Menu → Install app
 
 📌 Future Improvements
 
@@ -134,9 +150,5 @@ Production-like project structure
 Alexander Dudarin
 
 Frontend Developer
-<<<<<<< HEAD
-[т.me/Dudarin23](https://t.me/Dudarin23)
-=======
 
 [Мой Telegram](https://t.me/Dudarin23)
->>>>>>> beb55009210ce61e497d53c237e2c74ddfea1a5e
