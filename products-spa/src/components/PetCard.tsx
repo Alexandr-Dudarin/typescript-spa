@@ -21,7 +21,10 @@ const PetCard = ({ pet }: Props) => {
     >
       <img src={pet.image}
         alt={pet.title}
-        className="pet-card__image" />
+        className="pet-card__image"
+        onError={(e) => {
+          e.currentTarget.src = '/placeholder.png';
+        }} />
 
       <div className="pet-card__content">
         <h3>{pet.title}</h3>

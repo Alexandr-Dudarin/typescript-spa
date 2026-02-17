@@ -1,5 +1,5 @@
 import { useForm } from 'react-hook-form';
-import { useRef } from 'react';
+import { useRef, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { addPet } from '../features/pets/petsSlice';
 import { useNavigate } from 'react-router-dom';
@@ -17,12 +17,20 @@ const CreatePetPage = () => {
   const {
     register,
     handleSubmit,
+    setValue,
     formState: { errors },
   } = useForm<FormData>();
+
   const dispatch = useDispatch<AppDispatch>();
   const navigate = useNavigate();
 
   const textareaRef = useRef<HTMLTextAreaElement | null>(null);
+  const fileInputRef = useRef<HTMLInputElement | null>(null);
+
+
+  const [imageBase64, setImageBase64] = useState<string>('');
+  const [preview, setPreview] = useState<string>('');
+  const [fileError, setFileError] = useState<string | null>(null);
 
   const autoGrow = () => {
     const el = textareaRef.current;
@@ -32,14 +40,44 @@ const CreatePetPage = () => {
     el.style.height = el.scrollHeight + 'px';
   };
 
+  const MAX_SIZE = 3 * 1024 * 1024;
+
+  const handleFile = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+
+    if (file.size > MAX_SIZE) {
+      setFileError('File must be less than 3MB');
+      return;
+    }
+
+    setFileError(null);
+
+    const reader = new FileReader();
+
+    reader.onloadend = () => {
+      const base64 = reader.result as string;
+      setImageBase64(base64);
+      setPreview(base64);
+      setValue('image', '');
+    };
+
+    reader.readAsDataURL(file);
+  };
+
   const onSubmit = (data: FormData) => {
+    const finalImage = imageBase64 || data.image;
+
     dispatch(
       addPet({
         id: Date.now().toString(),
         liked: false,
-        ...data,
+        title: data.title,
+        description: data.description,
+        image: finalImage,
       })
     );
+
     navigate('/pets');
   };
 
@@ -56,32 +94,62 @@ const CreatePetPage = () => {
             placeholder="Title"
             {...register('title', {
               required: 'Title is required',
-              pattern: {
-                value: /^[^@!?%$]+$/,
-                message: 'Title contains forbidden characters',
-              },
               minLength: {
                 value: 3,
                 message: 'Title must be at least 3 characters',
               },
             })}
           />
-          {errors.title && (
-            <p className="form-error">{errors.title.message}</p>
-          )}
+          {errors.title && <p className="form-error">{errors.title.message}</p>}
         </div>
 
         <div className="form-field">
           <label htmlFor="image">Image URL</label>
           <input
             id="image"
-            placeholder="Image URL"
-            {...register('image', { required: 'Image is required' })}
+            placeholder="https://..."
+            {...register('image', {
+              validate: value =>
+                imageBase64 || value ? true : 'Image is required',
+            })}
           />
-          {errors.image && (
-            <p className="form-error">{errors.image.message}</p>
-          )}
+          {errors.image && <p className="form-error">{errors.image.message}</p>}
         </div>
+
+        <div className="form-field">
+          <label htmlFor="file">Upload image</label>
+          <input
+            ref={fileInputRef}
+            id="file"
+            type="file"
+            accept="image/*"
+            onChange={handleFile}
+          />
+          {fileError && <p className="form-error">{fileError}</p>}
+        </div>
+
+        {preview && (
+          <div className="form-field">
+            <p>Preview:</p>
+
+            <img src={preview} className="image-preview" />
+
+            <Button
+              type="button"
+              variant="ghost"
+              onClick={() => {
+                setPreview('');
+                setImageBase64('');
+                if (fileInputRef.current) {
+                  fileInputRef.current.value = '';
+                }
+              }}
+            >
+              Remove image
+            </Button>
+          </div>
+        )}
+
 
         <div className="form-field">
           <label htmlFor="description">Description</label>
@@ -91,13 +159,12 @@ const CreatePetPage = () => {
             {...register('description', {
               required: 'Description is required',
             })}
-            ref={(e) => {
+            ref={e => {
               register('description').ref(e);
               textareaRef.current = e;
             }}
             onInput={autoGrow}
           />
-
           {errors.description && (
             <p className="form-error">{errors.description.message}</p>
           )}
@@ -110,7 +177,6 @@ const CreatePetPage = () => {
       </div>
     </form>
   );
-
 };
 
 export default CreatePetPage;
