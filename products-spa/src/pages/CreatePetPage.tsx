@@ -1,5 +1,5 @@
 import { useForm } from 'react-hook-form';
-import { useRef, useState } from 'react';
+import { useRef, useState, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { addPet } from '../features/pets/petsSlice';
 import { useNavigate } from 'react-router-dom';
@@ -35,6 +35,24 @@ const CreatePetPage = () => {
   const [preview, setPreview] = useState<string>('');
   const [fileError, setFileError] = useState<string | null>(null);
   const [isDragging, setIsDragging] = useState(false);
+
+  useEffect(() => {
+    if (imageUrl) {
+      setPreview('');
+      setImageBase64('');
+      setFileError(null);
+
+      if (fileInputRef.current) {
+        fileInputRef.current.value = '';
+      }
+    }
+  }, [imageUrl]);
+
+  useEffect(() => {
+    if (imageUrl && !imageBase64) {
+      setPreview(imageUrl);
+    }
+  }, [imageUrl, imageBase64]);
 
   const autoGrow = () => {
     const el = textareaRef.current;
@@ -159,7 +177,13 @@ const CreatePetPage = () => {
               if (!imageUrl) fileInputRef.current?.click();
             }}
           >
-            <p>Drag & drop image here or click to upload</p>
+            <p>
+              {imageUrl
+                ? 'Image upload disabled because URL is provided'
+                : isDragging
+                  ? 'Drop image here'
+                  : 'Drag & drop image here or click to upload'}
+            </p>
 
             <input
               ref={fileInputRef}
@@ -178,7 +202,7 @@ const CreatePetPage = () => {
           <div className="form-field">
             <p>Preview:</p>
 
-            <img src={preview} className="image-preview" alt="Preview" />
+            <img src={preview} className="image-preview" alt="Preview" onError={() => setPreview('')} />
 
             <Button
               type="button"

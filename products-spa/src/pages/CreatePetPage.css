@@ -66,14 +66,24 @@
 
 .drop-zone {
   border: 2px dashed var(--border-color);
-  padding: 24px;
   border-radius: 12px;
+  padding: 20px;
   text-align: center;
   cursor: pointer;
-  transition: 0.2s;
+  transition: 0.2s ease;
+  background: var(--card-bg);
+}
+
+.drop-zone:hover {
+  border-color: #888;
 }
 
 .drop-zone.dragging {
-  background: rgba(0,0,0,0.05);
-  border-color: var(--accent-color);
+  border-color: #4f46e5;
+  background: rgba(79, 70, 229, 0.08);
+}
+
+.drop-zone.disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
 }
