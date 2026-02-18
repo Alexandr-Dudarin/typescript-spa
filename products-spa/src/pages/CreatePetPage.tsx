@@ -18,8 +18,11 @@ const CreatePetPage = () => {
     register,
     handleSubmit,
     setValue,
+    watch,
     formState: { errors },
   } = useForm<FormData>();
+
+  const imageUrl = watch('image');
 
   const dispatch = useDispatch<AppDispatch>();
   const navigate = useNavigate();
@@ -31,6 +34,7 @@ const CreatePetPage = () => {
   const [imageBase64, setImageBase64] = useState<string>('');
   const [preview, setPreview] = useState<string>('');
   const [fileError, setFileError] = useState<string | null>(null);
+  const [isDragging, setIsDragging] = useState(false);
 
   const autoGrow = () => {
     const el = textareaRef.current;
@@ -42,10 +46,7 @@ const CreatePetPage = () => {
 
   const MAX_SIZE = 3 * 1024 * 1024;
 
-  const handleFile = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const file = e.target.files?.[0];
-    if (!file) return;
-
+  const processFile = (file: File) => {
     if (file.size > MAX_SIZE) {
       setFileError('File must be less than 3MB');
       return;
@@ -64,6 +65,35 @@ const CreatePetPage = () => {
 
     reader.readAsDataURL(file);
   };
+
+  const handleDrop = (e: React.DragEvent<HTMLDivElement>) => {
+    e.preventDefault();
+    setIsDragging(false);
+
+    const file = e.dataTransfer.files[0];
+    if (file) processFile(file);
+  };
+
+  const handleDragOver = (e: React.DragEvent<HTMLDivElement>) => {
+    e.preventDefault();
+  };
+
+  const handleDragEnter = () => setIsDragging(true);
+  const handleDragLeave = (e: React.DragEvent<HTMLDivElement>) => {
+    if (!e.currentTarget.contains(e.relatedTarget as Node)) {
+      setIsDragging(false);
+    }
+  };
+
+
+  const handleFile = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+
+    processFile(file);
+  };
+
+
 
   const onSubmit = (data: FormData) => {
     const finalImage = imageBase64 || data.image;
@@ -108,6 +138,7 @@ const CreatePetPage = () => {
           <input
             id="image"
             placeholder="https://..."
+            disabled={!!imageBase64}
             {...register('image', {
               validate: value =>
                 imageBase64 || value ? true : 'Image is required',
@@ -118,13 +149,28 @@ const CreatePetPage = () => {
 
         <div className="form-field">
           <label htmlFor="file">Upload image</label>
-          <input
-            ref={fileInputRef}
-            id="file"
-            type="file"
-            accept="image/*"
-            onChange={handleFile}
-          />
+          <div
+            className={`drop-zone ${isDragging ? 'dragging' : ''} ${imageUrl ? 'disabled' : ''}`}
+            onDrop={handleDrop}
+            onDragOver={handleDragOver}
+            onDragEnter={handleDragEnter}
+            onDragLeave={handleDragLeave}
+            onClick={() => {
+              if (!imageUrl) fileInputRef.current?.click();
+            }}
+          >
+            <p>Drag & drop image here or click to upload</p>
+
+            <input
+              ref={fileInputRef}
+              id="file"
+              type="file"
+              accept="image/*"
+              onChange={handleFile}
+              disabled={!!imageUrl}
+              hidden
+            />
+          </div>
           {fileError && <p className="form-error">{fileError}</p>}
         </div>
 
@@ -132,7 +178,15 @@ const CreatePetPage = () => {
           <div className="form-field">
             <p>Preview:</p>
 
-            <img src={preview} className="image-preview" />
+            <img src={preview} className="image-preview" alt="Preview" />
+
+            <Button
+              type="button"
+              variant="ghost"
+              onClick={() => fileInputRef.current?.click()}
+            >
+              Replace image
+            </Button>
 
             <Button
               type="button"
@@ -140,6 +194,8 @@ const CreatePetPage = () => {
               onClick={() => {
                 setPreview('');
                 setImageBase64('');
+                setFileError(null);
+                setValue('image', '');
                 if (fileInputRef.current) {
                   fileInputRef.current.value = '';
                 }
