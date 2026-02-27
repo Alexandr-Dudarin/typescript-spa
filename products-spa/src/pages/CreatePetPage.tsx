@@ -62,7 +62,7 @@ const CreatePetPage = () => {
     el.style.height = el.scrollHeight + 'px';
   };
 
-  const MAX_SIZE = 3 * 1024 * 1024;
+  const MAX_SIZE = 5 * 1024 * 1024;
 
   const processFile = (file: File) => {
     if (file.size > MAX_SIZE) {
